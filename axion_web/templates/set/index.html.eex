@@ -1,0 +1,60 @@
+<h1>New Set</h1>
+
+<%= form_for @changeset, Routes.set_path(@conn, :create), fn f -> %>
+  <%= if @changeset.action do %>
+    <div class="alert alert-danger">
+      <p>Oops, something went wrong! Please check the errors below:</p>
+      <ul>
+        <%= for error <- @changeset.errors do %>
+          <li><%= error.message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label f, :date %>
+    <%= date_input f, :date %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :exercise %>
+    <%= text_input f, :exercise %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :reps %>
+    <%= number_input f, :reps %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :weight %>
+    <%= number_input f, :weight %>
+  </div>
+
+  <div>
+    <%= submit "Save Set" %>
+  </div>
+<% end %>
+
+<h2>Existing Sets</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Exercise</th>
+      <th>Reps</th>
+      <th>Weight</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for set <- @sets do %>
+      <tr>
+        <td><%= set.date %></td>
+        <td><%= set.exercise %></td>
+        <td><%= set.reps %></td>
+        <td><%= set.weight %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
